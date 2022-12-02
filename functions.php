@@ -18,7 +18,7 @@ function generateRandomString($len, $char, $rep){
     } while(!$rep && in_array($char[$index_letter], $password_array));
     $new_password .= $char[$index_letter];
   }
-
+  session_start();
   $_SESSION['password'] = $new_password;
 }
 

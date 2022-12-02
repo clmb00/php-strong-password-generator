@@ -1,0 +1,29 @@
+body{
+  background-color: #647C90;
+  font-weight: bold;
+  color: #4E4F50;
+}
+.my_container{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+.inside_container{
+  width: 70%;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: rgb(255,255,240,.7);
+  text-align: center;
+}
+.form_grid{
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+label{
+  font-weight: 400;
+}
+h1{
+  color: black;
+}
