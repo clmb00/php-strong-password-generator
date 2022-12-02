@@ -11,13 +11,14 @@
   $psw_length = $_GET['psw_length'] ?? 0;
   $repetition = $_GET['repetition'] ?? 0;
   $whichChar = $_GET['whichChar'] ?? 0;
+  $tot_char = '';
   
   if ($psw_length){
     foreach($whichChar as $char){
-      $tot_char[] = $charachters[$char];
+      $tot_char .= $charachters[$char];
     }
     session_start();
-    generateRandomString($psw_length, $tot_char);
+    generateRandomString($psw_length, $tot_char, $repetition);
     header("Location: ./result.php");
   }
 
@@ -41,16 +42,16 @@
 
       <div class="mb-3">
         <label for="rangeLength" class="form-label">Password length:</label>
-        <input type="range" class="form-range" min="4" max="32" id="rangeLength" name="psw_length" onchange="document.getElementById('rangeValue').innerText = 'Lenght: ' + document.getElementById('rangeLength').value">
+        <input type="range" class="form-range" min="4" max="30" id="rangeLength" name="psw_length" onchange="document.getElementById('rangeValue').innerText = 'Lenght: ' + document.getElementById('rangeLength').value">
         <p id="rangeValue">Lenght: 18</p>
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="repetition" value="true" id="repetitionRadioYes" checked>
+        <input class="form-check-input" type="radio" name="repetition" value="1" id="repetitionRadioYes" checked>
         <label class="form-check-label" for="repetitionRadioYes">Ripetition</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="repetition" value="false" id="repetitionRadioNo">
+        <input class="form-check-input" type="radio" name="repetition" value="0" id="repetitionRadioNo">
         <label class="form-check-label" for="repetitionRadioNo">No Ripetition</label>
       </div>
 

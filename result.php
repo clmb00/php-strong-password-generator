@@ -17,6 +17,7 @@
   <div class="container">
     <h1>Password Generated: </h1>
     <h2><?php echo $_SESSION['password'] ?></h2>
+    <h2><?php echo $_SESSION['ciao'] ?></h2>
     <a href="./index.php">Torna indietro</a>
   </div>
   
