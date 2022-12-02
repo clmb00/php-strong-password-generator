@@ -2,15 +2,19 @@
 
   include_once './functions.php';
 
-  $psw_length = $_GET['psw_length'] ?? 0;
-
   $characters = [
     '0123456789',
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     '!?&%$^+-*/()[]{}@#_='
   ];
-
-  $new_password = generateRandomString($psw_length, $characters);
+  
+  $psw_length = $_GET['psw_length'] ?? 0;
+  
+  if ($psw_length){
+    session_start();
+    generateRandomString($psw_length, $characters);
+    header("Location: ./result.php");
+  }
 
 ?>
 
@@ -39,7 +43,6 @@
       </div> -->
       <button type="submit" class="btn btn-primary">Generate</button>
     </form>
-    <h2><?php echo $new_password ?> - check length: <?php echo strlen($new_password) ?></h2>
   </div>
   
 </body>
