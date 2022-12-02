@@ -2,17 +2,22 @@
 
   include_once './functions.php';
 
-  $characters = [
-    '0123456789',
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    '!?&%$^+-*/()[]{}@#_='
+  $charachters = [
+    'numbers' => '0123456789',
+    'letters' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    'specials' => '!?&%$^+-*/()[]{}@#_='
   ];
-  
+
   $psw_length = $_GET['psw_length'] ?? 0;
+  $repetition = $_GET['repetition'] ?? 0;
+  $whichChar = $_GET['whichChar'] ?? 0;
   
   if ($psw_length){
+    foreach($whichChar as $char){
+      $tot_char[] = $charachters[$char];
+    }
     session_start();
-    generateRandomString($psw_length, $characters);
+    generateRandomString($psw_length, $tot_char);
     header("Location: ./result.php");
   }
 
@@ -33,14 +38,34 @@
   <div class="container">
     <h1>PHP Strong Password Generator</h1>
     <form action="./index.php" method="GET">
+
       <div class="mb-3">
         <label for="rangeLength" class="form-label">Password length:</label>
         <input type="range" class="form-range" min="4" max="32" id="rangeLength" name="psw_length" onchange="document.getElementById('rangeValue').innerText = 'Lenght: ' + document.getElementById('rangeLength').value">
         <p id="rangeValue">Lenght: 18</p>
-      <!-- <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div> -->
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="repetition" value="true" id="repetitionRadioYes" checked>
+        <label class="form-check-label" for="repetitionRadioYes">Ripetition</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="repetition" value="false" id="repetitionRadioNo">
+        <label class="form-check-label" for="repetitionRadioNo">No Ripetition</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="whichChar[]" value="letters" id="checkLetters" checked>
+        <label class="form-check-label" for="checkLetters">Letters</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="whichChar[]" value="numbers" id="checkNumbers" checked>
+        <label class="form-check-label" for="checkNumbers">Numbers</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="whichChar[]" value="specials" id="checkSpecial" checked>
+        <label class="form-check-label" for="checkSpecial">Special Charachters</label>
+      </div>
       <button type="submit" class="btn btn-primary">Generate</button>
     </form>
   </div>

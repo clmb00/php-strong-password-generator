@@ -9,7 +9,7 @@ function generateRandomString($len, $char){
     $new_password .= $char[$index_array][$index_letter];
   }
 
-  $_SESSION['password'] = $new_password; 
+  $_SESSION['password'] = $new_password;
 }
 
 ?>
