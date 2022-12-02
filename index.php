@@ -1,18 +1,16 @@
 <?php
 
+  include_once './functions.php';
+
   $psw_length = $_GET['psw_length'] ?? 0;
-  $new_password = '';
+
   $characters = [
     '0123456789',
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     '!?&%$^+-*/()[]{}@#_='
   ];
 
-  for($i=0; $i<$psw_length; $i++){
-    $index_array = rand(0,2);
-    $index_letter = rand(0, strlen($characters[$index_array]) -1 );
-    $new_password .= $characters[$index_array][$index_letter];
-  }
+  $new_password = generateRandomString($psw_length, $characters);
 
 ?>
 
